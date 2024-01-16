@@ -1,0 +1,38 @@
+# Cargar el conjunto de datos "cars"
+data(cars)
+
+# Medidas de posición central y dispersión
+# This provides a summary of the cars dataset
+summary(cars)
+
+# Asimetría y curtosis
+# Install the e1071 package if not already installed
+# install.packages("e1071")
+library(e1071)
+
+# Calculate and display skewness for 'speed' and 'dist' in the cars dataset
+cat("Skewness - Speed:", skewness(cars$speed), "\n")
+cat("Skewness - Distance:", skewness(cars$dist), "\n")
+
+# Calculate and display kurtosis for 'speed' and 'dist'
+cat("Kurtosis - Speed:", kurtosis(cars$speed), "\n")
+cat("Kurtosis - Distance:", kurtosis(cars$dist), "\n")
+
+# Gráfico de histograma para "speed"
+# Histogram for the 'speed' variable
+hist(cars$speed, main = "Histograma de Velocidad", xlab = "Velocidad")
+
+# Gráfico de histograma para "dist"
+# Histogram for the 'dist' variable
+hist(cars$dist, main = "Histograma de Distancia", xlab = "Distancia")
+
+# Diagrama de dispersión y ajuste lineal
+# Scatter plot with linear regression for speed vs distance
+plot(cars$speed, cars$dist, main = "Diagrama de Dispersión", xlab = "Velocidad", ylab = "Distancia")
+regression_model <- lm(dist ~ speed, data = cars)
+abline(regression_model, col = "red")
+
+# Coeficiente de determinación
+# Calculate and display the R-squared value of the regression model
+r_squared <- summary(regression_model)$r.squared
+cat("Coeficiente de Determinación (R-squared):", r_squared, "\n")
